@@ -11,7 +11,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/admin.directory.user.readonly"
 ]
 HOST = "localhost"
-PORT = 8080
+PORT = 8081
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -37,6 +37,7 @@ def authorise(secrets: dict[str, str]) -> dict[str, str]:
         "redirect_uri": redirect_uri,
         "scope": " ".join(SCOPES),
         "state": hashlib.sha256(os.urandom(1024)).hexdigest(),
+        "prompt": "consent",
         "access_type": "offline"
     }
     url = f"{secrets['auth_uri']}?{urlencode(params)}"

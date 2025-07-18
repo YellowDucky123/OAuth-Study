@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "select.h": "c",
+        "stdbool.h": "c",
+        "linkedlist.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}
