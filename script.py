@@ -8,7 +8,8 @@ from urllib.parse import parse_qsl, urlencode
 import requests
 
 SCOPES = [
-    "https://www.googleapis.com/auth/admin.directory.user.readonly"
+    "email",
+    "profile",
 ]
 HOST = "localhost"
 PORT = 8081
@@ -27,6 +28,22 @@ class Server(HTTPServer):
     def __init__(self, host: str, port: int) -> None:
         super().__init__((host, port), RequestHandler)
         self.query_params: dict[str, str] = {}
+
+def userInfo(accessToken: str) -> dict[str, str]:
+    authorisation = "Bearer " + accessToken
+    params = {
+        "Host": "www.googleapis.com",
+        "Content-length": "0",
+        "Authorization": authorisation
+    }
+    with requests.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        headers=params
+    ) as response:
+        if response.status_code != 200:
+            raise RuntimeError("Failed to authorise")
+        
+        return response.json()
 
 def authorise(secrets: dict[str, str]) -> dict[str, str]:
     redirect_uri = f"{secrets["redirect_uris"][0]}:{PORT}"
@@ -77,3 +94,7 @@ if __name__ == "__main__":
 
     tokens = authorise(secrets)
     print(f"Tokens: {tokens}")
+    print()
+
+    userinfo = userInfo(tokens['access_token'])
+    print(userinfo)

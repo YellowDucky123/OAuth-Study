@@ -1,7 +1,7 @@
 import './App.css';
 
 const click_handle = () => {
-  window.location.href = "https://www.google.com"
+  window.location.href = "http://localhost:8080/OAuth2"
 }
 
 function App() {

@@ -24,7 +24,7 @@ char* token_uri = "https://oauth2.googleapis.com/token";
 char* auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs";
 char* client_secret = "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";
 char* redirect_uri = "http://localhost:8080";
-int state = -1;
+int state = -1;    // global for demo
 
 void OAuth(int state);
 struct linkedlist CodeStateTokenRequest(char* info);
