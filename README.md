@@ -1,5 +1,5 @@
 # This is a repository containing results from my Study/Research on OAuth2.0
-The Study was mostly on Google's OAuth2, However, concepts on flows apply to all OAuth2.0s
+The Study was mostly on Google's OAuth2, However, concepts and flows apply to all OAuth2.0s
 
 ## File Explanations
 ### Script.py
